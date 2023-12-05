@@ -1,7 +1,7 @@
 # Stage 1: Base
 FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04 as base
 
-ARG KOHYA_VERSION=v22.2.1
+ARG KOHYA_VERSION=v22.2.2
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -117,4 +117,4 @@ COPY kohya_ss/accelerate.yaml ./
 
 # Start the container
 SHELL ["/bin/bash", "--login", "-c"]
-CMD [ "/start.sh" ]
+ENTRYPOINT [ "/start.sh" ]
