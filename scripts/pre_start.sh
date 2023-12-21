@@ -20,6 +20,9 @@ echo "Configuring accelerate..."
 mkdir -p /root/.cache/huggingface/accelerate
 mv /accelerate.yaml /root/.cache/huggingface/accelerate/default_config.yaml
 
+# Create logs directory
+mkdir -p /workspace/logs
+
 if [[ ${DISABLE_AUTOLAUNCH} ]]
 then
     echo "Auto launching is disabled so the application will not be started automatically"
@@ -30,7 +33,6 @@ then
     echo "   ./gui.sh --listen 0.0.0.0 --server_port 3001 --headless"
 else
     echo "Starting Kohya_ss Web UI"
-    mkdir -p /workspace/logs
     cd /workspace/kohya_ss
     source venv/bin/activate
     nohup ./gui.sh --listen 0.0.0.0 --server_port 3001 --headless > /workspace/logs/kohya_ss.log 2>&1 &
