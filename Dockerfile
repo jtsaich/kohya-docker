@@ -1,7 +1,7 @@
 # Stage 1: Base
 FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04 as base
 
-ARG KOHYA_VERSION=v22.4.0
+ARG KOHYA_VERSION=v22.4.1
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive \
