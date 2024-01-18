@@ -15,6 +15,8 @@ sync_apps() {
     echo "Syncing Kohya_ss to workspace, please wait..."
     rsync --remove-source-files -rlptDu /kohya_ss/ /workspace/kohya_ss/
     rm -rf /kohya_ss
+
+    echo "${TEMPLATE_VERSION}" > /workspace/template_version
 }
 
 fix_venvs() {
