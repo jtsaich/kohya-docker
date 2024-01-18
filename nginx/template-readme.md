@@ -1,6 +1,6 @@
 ## Kohya SS
 
-### Version 1.11.0
+### Version 1.11.1
 
 ### Included in this Template
 
