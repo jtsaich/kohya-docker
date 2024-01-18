@@ -1,27 +1,50 @@
 #!/usr/bin/env bash
+
 export PYTHONUNBUFFERED=1
 
-echo "Container is running"
+echo "Template version: ${TEMPLATE_VERSION}"
 
-# Sync Kohya_ss to workspace to support Network volumes
-echo "Syncing Kohya_ss to workspace, please wait..."
-rsync -au /kohya_ss/ /workspace/kohya_ss/
-rm -rf /kohya_ss
+if [[ -e "/workspace/template_version" ]]; then
+    EXISTING_VERSION=$(cat /workspace/template_version)
+else
+    EXISTING_VERSION="0.0.0"
+fi
 
-# Fix the venv to make it work from /workspace
-echo "Fixing venv..."
-/fix_venv.sh /kohya_ss/venv /workspace/kohya_ss/venv
+sync_apps() {
+    # Sync Kohya_ss to workspace to support Network volumes
+    echo "Syncing Kohya_ss to workspace, please wait..."
+    rsync --remove-source-files -rlptDu /kohya_ss/ /workspace/kohya_ss/
+    rm -rf /kohya_ss
+}
 
-# Link model
-ln -s /sd-models/sd_xl_base_1.0.safetensors /workspace/sd_xl_base_1.0.safetensors
+fix_venvs() {
+    # Fix the venv to make it work from /workspace
+    echo "Fixing venv..."
+    /fix_venv.sh /kohya_ss/venv /workspace/kohya_ss/venv
+}
 
-# Configure accelerate
-echo "Configuring accelerate..."
-mkdir -p /root/.cache/huggingface/accelerate
-mv /accelerate.yaml /root/.cache/huggingface/accelerate/default_config.yaml
+link_models() {
+    # Link model
+    ln -s /sd-models/sd_xl_base_1.0.safetensors /workspace/sd_xl_base_1.0.safetensors
+}
 
-# Create logs directory
-mkdir -p /workspace/logs
+if [ "$(printf '%s\n' "$EXISTING_VERSION" "$TEMPLATE_VERSION" | sort -V | head -n 1)" = "$EXISTING_VERSION" ]; then
+    if [ "$EXISTING_VERSION" != "$TEMPLATE_VERSION" ]; then
+        sync_apps
+        fix_venvs
+        link_models
+
+        # Configure accelerate
+        echo "Configuring accelerate..."
+        mkdir -p /root/.cache/huggingface/accelerate
+        mv /accelerate.yaml /root/.cache/huggingface/accelerate/default_config.yaml
+
+        # Create logs directory
+        mkdir -p /workspace/logs
+    else
+        echo "Existing version is the same as the template version, no syncing required."
+    fi
+fi
 
 if [[ ${DISABLE_AUTOLAUNCH} ]]
 then
