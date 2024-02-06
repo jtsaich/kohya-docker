@@ -122,4 +122,4 @@ COPY kohya_ss/accelerate.yaml ./
 # Start the container
 ENV TEMPLATE_VERSION=1.12.1
 SHELL ["/bin/bash", "--login", "-c"]
-ENTRYPOINT [ "/start.sh" ]
+CMD [ "/start.sh" ]
