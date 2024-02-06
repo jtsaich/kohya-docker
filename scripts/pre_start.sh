@@ -40,9 +40,6 @@ if [ "$(printf '%s\n' "$EXISTING_VERSION" "$TEMPLATE_VERSION" | sort -V | head -
         echo "Configuring accelerate..."
         mkdir -p /root/.cache/huggingface/accelerate
         mv /accelerate.yaml /root/.cache/huggingface/accelerate/default_config.yaml
-
-        # Create logs directory
-        mkdir -p /workspace/logs
     else
         echo "Existing version is the same as the template version, no syncing required."
     fi

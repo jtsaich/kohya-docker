@@ -40,10 +40,14 @@ RUN apt update && \
         unzip \
         p7zip-full \
         htop \
+        screen \
+        tmux \
         pkg-config \
         libcairo2-dev \
-        libgoogle-perftools4 libtcmalloc-minimal4 \
-        apt-transport-https ca-certificates && \
+        libgoogle-perftools4 \
+        libtcmalloc-minimal4 \
+        apt-transport-https \
+        ca-certificates && \
     update-ca-certificates && \
     apt clean && \
     rm -rf /var/lib/apt/lists/* && \
@@ -116,6 +120,6 @@ COPY --chmod=755 scripts/* ./
 COPY kohya_ss/accelerate.yaml ./
 
 # Start the container
-ENV TEMPLATE_VERSION=1.12.0
+ENV TEMPLATE_VERSION=1.12.1
 SHELL ["/bin/bash", "--login", "-c"]
 ENTRYPOINT [ "/start.sh" ]
