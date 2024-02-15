@@ -1,7 +1,7 @@
 # Stage 1: Base
 FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04 as base
 
-ARG KOHYA_VERSION=v22.6.0
+ARG KOHYA_VERSION=v22.6.1
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -99,7 +99,7 @@ RUN pip3 install -U --no-cache-dir jupyterlab \
 RUN curl https://rclone.org/install.sh | bash
 
 # Install runpodctl
-RUN wget https://github.com/runpod/runpodctl/releases/download/v1.10.0/runpodctl-linux-amd -O runpodctl && \
+RUN wget https://github.com/runpod/runpodctl/releases/download/v1.13.0/runpodctl-linux-amd64 -O runpodctl && \
     chmod a+x runpodctl && \
     mv runpodctl /usr/local/bin
 
@@ -120,6 +120,6 @@ COPY --chmod=755 scripts/* ./
 COPY kohya_ss/accelerate.yaml ./
 
 # Start the container
-ENV TEMPLATE_VERSION=1.12.1
+ENV TEMPLATE_VERSION=1.12.2
 SHELL ["/bin/bash", "--login", "-c"]
 CMD [ "/start.sh" ]
