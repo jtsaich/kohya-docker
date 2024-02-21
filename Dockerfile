@@ -88,12 +88,18 @@ RUN python3 -m venv --system-site-packages venv && \
     pip3 install . && \
     deactivate
 
-# Install Jupyter
+# Install Jupyter, gdown and OhMyRunPod
 RUN pip3 install -U --no-cache-dir jupyterlab \
         jupyterlab_widgets \
         ipykernel \
         ipywidgets \
-        gdown
+        gdown \
+        OhMyRunPod
+
+# Install RunPod File Uploader
+RUN curl -sSL https://github.com/kodxana/RunPod-FilleUploader/raw/main/scripts/installer.sh -o installer.sh && \
+    chmod +x installer.sh && \
+    ./installer.sh
 
 # Install rclone
 RUN curl https://rclone.org/install.sh | bash
@@ -113,6 +119,9 @@ COPY nginx/template-readme.md /usr/share/nginx/html/README.md
 
 WORKDIR /
 
+# Set template version
+ENV TEMPLATE_VERSION=1.12.3
+
 # Copy the scripts
 COPY --chmod=755 scripts/* ./
 
@@ -120,6 +129,5 @@ COPY --chmod=755 scripts/* ./
 COPY kohya_ss/accelerate.yaml ./
 
 # Start the container
-ENV TEMPLATE_VERSION=1.12.2
 SHELL ["/bin/bash", "--login", "-c"]
 CMD [ "/start.sh" ]

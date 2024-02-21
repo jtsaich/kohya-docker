@@ -7,8 +7,11 @@
 * Python 3.10.12
 * Torch 2.0.1
 * xformers 0.0.22
+* Jupyter Lab
 * [Kohya_ss](https://github.com/bmaltais/kohya_ss) v22.6.1
 * [runpodctl](https://github.com/runpod/runpodctl)
+* [OhMyRunPod](https://github.com/kodxana/OhMyRunPod)
+* [RunPod File Uploader](https://github.com/kodxana/RunPod-FilleUploader)
 * [rclone](https://rclone.org/)
 * sd_xl_base_1.0.safetensors
 
@@ -34,11 +37,42 @@ docker run -d \
   -v /workspace \
   -p 3000:3001 \
   -p 8888:8888 \
+  -p 2999:2999 \
   -e JUPYTER_PASSWORD=Jup1t3R! \
   ashleykza/kohya:latest
 ```
 
 You can obviously substitute the image name and tag with your own.
+
+### Ports
+
+| Connect Port | Internal Port | Description          |
+|--------------|---------------|----------------------|
+| 3000         | 3001          | Kohya_ss             |
+| 8888         | 8888          | Jupyter Lab          |
+| 2999         | 2999          | RunPod File Uploader |
+
+### Environment Variables
+
+| Variable           | Description                                   | Default   |
+|--------------------|-----------------------------------------------|-----------|
+| JUPYTER_PASSWORD   | Password for Jupyter Lab                      | Jup1t3R!  |
+| DISABLE_AUTOLAUNCH | Disable Kohya_ss from launching automatically | (not set) |
+
+## Logs
+
+Kohya_ss creates a log file, and you can tail the log instead of
+killing the service to view the logs.
+
+| Application | Log file                     |
+|-------------|------------------------------|
+| Kohya_ss    | /workspace/logs/kohya_ss.log |
+
+For example:
+
+```bash
+tail -f /workspace/logs/kohya_ss.log
+```
 
 ## Acknowledgements
 
