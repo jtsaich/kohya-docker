@@ -8,7 +8,7 @@
 * Torch 2.0.1
 * xformers 0.0.22
 * Jupyter Lab
-* [Kohya_ss](https://github.com/bmaltais/kohya_ss) v22.6.1
+* [Kohya_ss](https://github.com/bmaltais/kohya_ss) v22.6.2
 * [runpodctl](https://github.com/runpod/runpodctl)
 * [OhMyRunPod](https://github.com/kodxana/OhMyRunPod)
 * [RunPod File Uploader](https://github.com/kodxana/RunPod-FilleUploader)

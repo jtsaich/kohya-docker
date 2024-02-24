@@ -1,7 +1,7 @@
 # Stage 1: Base
 FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04 as base
 
-ARG KOHYA_VERSION=v22.6.1
+ARG KOHYA_VERSION=v22.6.2
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -120,7 +120,7 @@ COPY nginx/template-readme.md /usr/share/nginx/html/README.md
 WORKDIR /
 
 # Set template version
-ENV TEMPLATE_VERSION=1.12.3
+ENV TEMPLATE_VERSION=1.12.4
 
 # Copy the scripts
 COPY --chmod=755 scripts/* ./
