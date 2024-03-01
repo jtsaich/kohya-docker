@@ -115,12 +115,11 @@ RUN rm -f /etc/ssh/ssh_host_*
 # NGINX Proxy
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY nginx/502.html /usr/share/nginx/html/502.html
-COPY nginx/template-readme.md /usr/share/nginx/html/README.md
 
 WORKDIR /
 
 # Set template version
-ENV TEMPLATE_VERSION=1.12.4
+ENV TEMPLATE_VERSION=1.12.5
 
 # Copy the scripts
 COPY --chmod=755 scripts/* ./
