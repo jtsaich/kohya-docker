@@ -1,6 +1,10 @@
 # Stage 1: Base
 FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04 as base
 
+ARG CU_VERSION=118
+ARG INDEX_URL="https://download.pytorch.org/whl/cu${CU_VERSION}"
+ARG TORCH_VERSION=2.1.2
+ARG XFORMERS_VERSION=0.0.23.post1
 ARG KOHYA_VERSION=v22.6.2
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -76,13 +80,12 @@ WORKDIR /kohya_ss
 COPY kohya_ss/requirements* ./
 RUN python3 -m venv --system-site-packages venv && \
     source venv/bin/activate && \
-    pip3 install torch==2.0.1 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118 && \
-    pip3 install xformers==0.0.22 \
-        bitsandbytes==0.41.1 \
-        tensorboard==2.14.1 \
-        tensorflow==2.14.0 \
+    pip3 install torch==${TORCH_VERSION}+cu${CU_VERSION} torchvision torchaudio --index-url ${INDEX_URL} && \
+    pip3 install xformers==${XFORMERS_VERSION}+cu${CU_VERSION} --index-url ${INDEX_URL} && \
+        bitsandbytes==0.41.2 \
+        tensorboard==2.15.2 \
+        tensorflow==2.15.0.post1 \
         wheel \
-        scipy \
         tensorrt && \
     pip3 install -r requirements.txt && \
     pip3 install . && \
@@ -105,7 +108,8 @@ RUN curl -sSL https://github.com/kodxana/RunPod-FilleUploader/raw/main/scripts/i
 RUN curl https://rclone.org/install.sh | bash
 
 # Install runpodctl
-RUN wget https://github.com/runpod/runpodctl/releases/download/v1.13.0/runpodctl-linux-amd64 -O runpodctl && \
+ARG RUNPODCTL_VERSION="v1.14.2"
+RUN wget "https://github.com/runpod/runpodctl/releases/download/${RUNPODCTL_VERSION}/runpodctl-linux-amd64" -O runpodctl && \
     chmod a+x runpodctl && \
     mv runpodctl /usr/local/bin
 
@@ -119,7 +123,7 @@ COPY nginx/502.html /usr/share/nginx/html/502.html
 WORKDIR /
 
 # Set template version
-ENV TEMPLATE_VERSION=1.12.5
+ENV TEMPLATE_VERSION=1.13.0
 
 # Copy the scripts
 COPY --chmod=755 scripts/* ./
