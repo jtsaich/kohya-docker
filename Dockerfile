@@ -82,7 +82,7 @@ RUN python3 -m venv --system-site-packages venv && \
     source venv/bin/activate && \
     pip3 install torch==${TORCH_VERSION}+cu${CU_VERSION} torchvision torchaudio --index-url ${INDEX_URL} && \
     pip3 install xformers==${XFORMERS_VERSION}+cu${CU_VERSION} --index-url ${INDEX_URL} && \
-        bitsandbytes==0.41.2 \
+    pip3 install bitsandbytes==0.41.2 \
         tensorboard==2.15.2 \
         tensorflow==2.15.0.post1 \
         wheel \
