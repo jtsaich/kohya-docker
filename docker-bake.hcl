@@ -15,5 +15,6 @@ target "default" {
         TORCH_VERSION = "2.1.2+cu${CU_VERSION}"
         XFORMERS_VERSION = "0.0.23.post1+cu${CU_VERSION}"
         KOHYA_VERSION = "v23.0.6"
+        RUNPODCTL_VERSION = "v1.14.2"
     }
 }
