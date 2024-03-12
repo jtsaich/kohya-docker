@@ -5,7 +5,7 @@ ARG CU_VERSION=118
 ARG INDEX_URL="https://download.pytorch.org/whl/cu${CU_VERSION}"
 ARG TORCH_VERSION=2.1.2
 ARG XFORMERS_VERSION=0.0.23.post1
-ARG KOHYA_VERSION=v22.6.2
+ARG KOHYA_VERSION=v23.0.5
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -82,7 +82,7 @@ RUN python3 -m venv --system-site-packages venv && \
     source venv/bin/activate && \
     pip3 install torch==${TORCH_VERSION}+cu${CU_VERSION} torchvision torchaudio --index-url ${INDEX_URL} && \
     pip3 install xformers==${XFORMERS_VERSION}+cu${CU_VERSION} --index-url ${INDEX_URL} && \
-    pip3 install bitsandbytes==0.41.2 \
+    pip3 install bitsandbytes==0.43.0 \
         tensorboard==2.15.2 \
         tensorflow==2.15.0.post1 \
         wheel \
@@ -123,7 +123,7 @@ COPY nginx/502.html /usr/share/nginx/html/502.html
 WORKDIR /
 
 # Set template version
-ENV TEMPLATE_VERSION=1.13.0
+ENV TEMPLATE_VERSION=2.0.0
 
 # Copy the scripts
 COPY --chmod=755 scripts/* ./

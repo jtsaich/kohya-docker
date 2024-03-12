@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+export PYTHONUNBUFFERED=1
 echo "Starting Kohya_ss Web UI"
 cd /workspace/kohya_ss
 source venv/bin/activate
