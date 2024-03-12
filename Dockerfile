@@ -76,10 +76,8 @@ WORKDIR /
 RUN git clone https://github.com/bmaltais/kohya_ss.git && \
     cd /kohya_ss && \
     git checkout ${KOHYA_VERSION} && \
-    git submodule update --init --recursive
-WORKDIR /kohya_ss
-COPY kohya_ss/requirements* ./
-RUN python3 -m venv --system-site-packages venv && \
+    git submodule update --init --recursive && \
+    python3 -m venv --system-site-packages venv && \
     source venv/bin/activate && \
     pip3 install torch==${TORCH_VERSION}+cu${CU_VERSION} torchvision torchaudio --index-url ${INDEX_URL} && \
     pip3 install xformers==${XFORMERS_VERSION}+cu${CU_VERSION} --index-url ${INDEX_URL} && \
