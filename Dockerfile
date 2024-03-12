@@ -119,7 +119,7 @@ COPY nginx/502.html /usr/share/nginx/html/502.html
 WORKDIR /
 
 # Set template version
-ENV TEMPLATE_VERSION=2.0.0
+ENV TEMPLATE_VERSION=2.0.1
 
 # Copy the scripts
 COPY --chmod=755 scripts/* ./
