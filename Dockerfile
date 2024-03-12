@@ -75,7 +75,8 @@ WORKDIR /
 # Install Kohya_ss
 RUN git clone https://github.com/bmaltais/kohya_ss.git && \
     cd /kohya_ss && \
-    git checkout ${KOHYA_VERSION}
+    git checkout ${KOHYA_VERSION} && \
+    git submodule update --init --recursive
 WORKDIR /kohya_ss
 COPY kohya_ss/requirements* ./
 RUN python3 -m venv --system-site-packages venv && \
@@ -83,12 +84,9 @@ RUN python3 -m venv --system-site-packages venv && \
     pip3 install torch==${TORCH_VERSION}+cu${CU_VERSION} torchvision torchaudio --index-url ${INDEX_URL} && \
     pip3 install xformers==${XFORMERS_VERSION}+cu${CU_VERSION} --index-url ${INDEX_URL} && \
     pip3 install bitsandbytes==0.43.0 \
-        tensorboard==2.15.2 \
-        tensorflow==2.15.0.post1 \
-        wheel \
-        tensorrt && \
+        tensorboard==2.15.2 tensorflow==2.15.0.post1 \
+        wheel packaging tensorrt && \
     pip3 install -r requirements.txt && \
-    pip3 install . && \
     deactivate
 
 # Install Jupyter, gdown and OhMyRunPod
