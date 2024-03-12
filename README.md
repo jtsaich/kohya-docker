@@ -22,6 +22,28 @@ You can use my custom [RunPod template](
 https://runpod.io/gsc?template=51q837fywe&ref=2xxro4sy)
 to launch it on RunPod.
 
+## Building the Docker image
+
+> [!NOTE]
+> You will need to edit the `docker-bake.hcl` file and update `RELEASE`,
+> and `tags`.  You can obviously edit the other values too, but these
+> are the most important ones.
+
+```bash
+# Clone the repo
+git clone https://github.com/ashleykleynhans/kohya-docker.git
+
+# Download the models
+cd kohya-docker
+wget https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors
+
+# Log in to Docker Hub
+docker login
+
+# Build the image, tag the image, and push the image to Docker Hub
+docker buildx bake -f docker-bake.hcl --push
+```
+
 ## Running Locally
 
 ### Install Nvidia CUDA Driver

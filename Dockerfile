@@ -1,12 +1,6 @@
 # Stage 1: Base
 FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04 as base
 
-ARG CU_VERSION=118
-ARG INDEX_URL="https://download.pytorch.org/whl/cu${CU_VERSION}"
-ARG TORCH_VERSION=2.1.2
-ARG XFORMERS_VERSION=0.0.23.post1
-ARG KOHYA_VERSION=v23.0.6
-
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive \
     TZ=Africa/Johannesburg \
@@ -73,14 +67,18 @@ COPY sd_xl_base_1.0.safetensors /sd-models/sd_xl_base_1.0.safetensors
 WORKDIR /
 
 # Install Kohya_ss
+ARG INDEX_URL
+ARG TORCH_VERSION
+ARG XFORMERS_VERSION
+ARG KOHYA_VERSION
 RUN git clone https://github.com/bmaltais/kohya_ss.git && \
     cd /kohya_ss && \
     git checkout ${KOHYA_VERSION} && \
     git submodule update --init --recursive && \
     python3 -m venv --system-site-packages venv && \
     source venv/bin/activate && \
-    pip3 install torch==${TORCH_VERSION}+cu${CU_VERSION} torchvision torchaudio --index-url ${INDEX_URL} && \
-    pip3 install xformers==${XFORMERS_VERSION}+cu${CU_VERSION} --index-url ${INDEX_URL} && \
+    pip3 install torch==${TORCH_VERSION} torchvision torchaudio --index-url ${INDEX_URL} && \
+    pip3 install xformers==${XFORMERS_VERSION} --index-url ${INDEX_URL} && \
     pip3 install bitsandbytes==0.43.0 \
         tensorboard==2.15.2 tensorflow==2.15.0.post1 \
         wheel packaging tensorrt && \
@@ -119,7 +117,8 @@ COPY nginx/502.html /usr/share/nginx/html/502.html
 WORKDIR /
 
 # Set template version
-ENV TEMPLATE_VERSION=2.0.1
+ARG RELEASE
+ENV TEMPLATE_VERSION=${RELEASE}
 
 # Copy the scripts
 COPY --chmod=755 scripts/* ./
