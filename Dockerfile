@@ -5,7 +5,7 @@ ARG CU_VERSION=118
 ARG INDEX_URL="https://download.pytorch.org/whl/cu${CU_VERSION}"
 ARG TORCH_VERSION=2.1.2
 ARG XFORMERS_VERSION=0.0.23.post1
-ARG KOHYA_VERSION=v23.0.5
+ARG KOHYA_VERSION=v23.0.6
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive \
