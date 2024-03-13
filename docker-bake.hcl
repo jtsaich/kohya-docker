@@ -1,3 +1,7 @@
+variable "APP" {
+    default = "kohya"
+}
+
 variable "RELEASE" {
     default = "2.0.3"
 }
@@ -8,7 +12,7 @@ variable "CU_VERSION" {
 
 target "default" {
     dockerfile = "Dockerfile"
-    tags = ["ashleykza/kohya:${RELEASE}"]
+    tags = ["ashleykza/${APP}:${RELEASE}"]
     args = {
         RELEASE = "${RELEASE}"
         INDEX_URL = "https://download.pytorch.org/whl/cu${CU_VERSION}"
