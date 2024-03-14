@@ -75,9 +75,10 @@ You can obviously substitute the image name and tag with your own.
 
 ## Environment Variables
 
-| Variable           | Description                                   | Default   |
-|--------------------|-----------------------------------------------|-----------|
-| DISABLE_AUTOLAUNCH | Disable Kohya_ss from launching automatically | (not set) |
+| Variable             | Description                                   | Default               |
+|----------------------|-----------------------------------------------|-----------------------|
+| JUPYTER_LAB_PASSWORD | Set a password for Jupyter lab                | not set - no password |
+| DISABLE_AUTOLAUNCH   | Disable Kohya_ss from launching automatically | (not set)             |
 
 ## Logs
 
