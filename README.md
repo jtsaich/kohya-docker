@@ -20,6 +20,7 @@
 * [OhMyRunPod](https://github.com/kodxana/OhMyRunPod)
 * [RunPod File Uploader](https://github.com/kodxana/RunPod-FilleUploader)
 * [rclone](https://rclone.org/)
+* [Application Manager](https://github.com/ashleykleynhans/app-manager)
 * sd_xl_base_1.0.safetensors
 
 ## Available on RunPod
@@ -65,6 +66,7 @@ docker run -d \
   --gpus all \
   -v /workspace \
   -p 3000:3001 \
+  -p 8000:8000 \
   -p 8888:8888 \
   -p 2999:2999 \
   ashleykza/kohya:latest
@@ -77,6 +79,7 @@ You can obviously substitute the image name and tag with your own.
 | Connect Port | Internal Port | Description          |
 |--------------|---------------|----------------------|
 | 3000         | 3001          | Kohya_ss             |
+| 8000         | 8000          | Application Manager  |
 | 8888         | 8888          | Jupyter Lab          |
 | 2999         | 2999          | RunPod File Uploader |
 

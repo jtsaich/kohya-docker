@@ -89,6 +89,13 @@ RUN python3 -m venv --system-site-packages venv && \
     pip3 install -r requirements.txt && \
     deactivate
 
+# Install Application Manager
+WORKDIR /
+RUN git clone https://github.com/ashleykleynhans/app-manager.git /app-manager && \
+    cd /app-manager && \
+    npm install
+COPY app-manager/config.json /app-manager/public/config.json
+
 # Install Jupyter, gdown and OhMyRunPod
 RUN pip3 install -U --no-cache-dir jupyterlab \
         jupyterlab_widgets \
