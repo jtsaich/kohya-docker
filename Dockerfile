@@ -16,6 +16,8 @@ RUN apt update && \
         python3.10-venv \
         python3-pip \
         python3-tk \
+        nodejs \
+        npm \
         bash \
         dos2unix \
         git \
