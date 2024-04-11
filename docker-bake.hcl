@@ -23,6 +23,6 @@ target "default" {
         TORCH_VERSION = "2.1.2+cu${CU_VERSION}"
         XFORMERS_VERSION = "0.0.23.post1+cu${CU_VERSION}"
         KOHYA_VERSION = "v23.1.3"
-        APP_MANAGER_VERSION = "1.0.1"
+        APP_MANAGER_VERSION = "1.0.2"
     }
 }
