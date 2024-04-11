@@ -47,7 +47,7 @@ RUN git clone https://github.com/ashleykleynhans/app-manager.git /app-manager &&
     git checkout tags/${APP_MANAGER_VERSION} && \
     npm install
 COPY app-manager/config.json /app-manager/public/config.json
-COPY --chmod=755 app-manager/*.sh /app-manager/
+COPY --chmod=755 app-manager/*.sh /app-manager/scripts/
 
 # Remove existing SSH host keys
 RUN rm -f /etc/ssh/ssh_host_*
