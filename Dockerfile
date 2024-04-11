@@ -40,9 +40,11 @@ RUN python3 -m venv --system-site-packages venv && \
     deactivate
 
 # Install Application Manager
+ARG APP_MANAGER_VERSION
 WORKDIR /
 RUN git clone https://github.com/ashleykleynhans/app-manager.git /app-manager && \
     cd /app-manager && \
+    git checkout tags/${APP_MANAGER_VERSION} && \
     npm install
 COPY app-manager/config.json /app-manager/public/config.json
 
