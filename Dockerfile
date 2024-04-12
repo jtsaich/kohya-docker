@@ -1,4 +1,5 @@
-FROM ashleykza/runpod-base:1.0.0-cuda11.8.0-torch2.1.2
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive \
