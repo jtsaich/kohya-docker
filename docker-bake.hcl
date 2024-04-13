@@ -7,7 +7,7 @@ variable "APP" {
 }
 
 variable "RELEASE" {
-    default = "2.2.1"
+    default = "2.3.0"
 }
 
 variable "CU_VERSION" {
@@ -23,7 +23,7 @@ target "default" {
         INDEX_URL = "https://download.pytorch.org/whl/cu${CU_VERSION}"
         TORCH_VERSION = "2.1.2+cu${CU_VERSION}"
         XFORMERS_VERSION = "0.0.23.post1+cu${CU_VERSION}"
-        KOHYA_VERSION = "v23.1.3"
+        KOHYA_VERSION = "v23.1.5"
         APP_MANAGER_VERSION = "1.0.2"
     }
 }
