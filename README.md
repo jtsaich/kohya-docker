@@ -15,7 +15,7 @@
 * Torch 2.1.2
 * xformers 0.0.23.post1
 * Jupyter Lab
-* [Kohya_ss](https://github.com/bmaltais/kohya_ss) v23.1.5
+* [Kohya_ss](https://github.com/bmaltais/kohya_ss) v23.1.3
 * [runpodctl](https://github.com/runpod/runpodctl)
 * [OhMyRunPod](https://github.com/kodxana/OhMyRunPod)
 * [RunPod File Uploader](https://github.com/kodxana/RunPod-FilleUploader)
@@ -33,7 +33,7 @@ to launch it on RunPod.
 ## Building the Docker image
 
 > [!NOTE]
-> You will need to edit the `docker-bake.hcl` file and update `USERNAME`,
+> You will need to edit the `docker-bake.hcl` file and update `REGISTRY_USER`,
 > and `RELEASE`.  You can obviously edit the other values too, but these
 > are the most important ones.
 
@@ -50,6 +50,10 @@ docker login
 
 # Build the image, tag the image, and push the image to Docker Hub
 docker buildx bake -f docker-bake.hcl --push
+
+# Same as above but customize registry/user/release:
+REGISTRY=ghcr.io REGISTRY_USER=myuser RELEASE=my-release docker buildx \
+    bake -f docker-bake.hcl --push
 ```
 
 ## Running Locally
