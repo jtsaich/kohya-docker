@@ -13,17 +13,18 @@ else
 fi
 
 sync_apps() {
-    # Sync application to workspace to support Network volumes
-    echo "Syncing ${APP} to workspace, please wait..."
-    rsync --remove-source-files -rlptDu /${APP}/ /workspace/${APP}/
-    rm -rf /kohya_ss
+    # Only sync if the DISABLE_SYNC environment variable is not set
+    if [ -z "${DISABLE_SYNC}" ]; then
+        # Sync application to workspace to support Network volumes
+        echo "Syncing ${APP} to workspace, please wait..."
+        mv /${APP} /workspace/${APP}
 
-    # Sync Application Manager to workspace to support Network volumes
-    echo "Syncing Application Manager to workspace, please wait..."
-    rsync --remove-source-files -rlptDu /app-manager/ /workspace/app-manager/
-    rm -rf /app-manager
+        # Sync Application Manager to workspace to support Network volumes
+        echo "Syncing Application Manager to workspace, please wait..."
+        mv /app-manager /workspace/app-manager
 
-    echo "${TEMPLATE_VERSION}" > ${DOCKER_IMAGE_VERSION_FILE}
+        echo "${TEMPLATE_VERSION}" > ${DOCKER_IMAGE_VERSION_FILE}
+    fi
 }
 
 fix_venvs() {

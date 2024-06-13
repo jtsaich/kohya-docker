@@ -89,10 +89,11 @@ You can obviously substitute the image name and tag with your own.
 
 ## Environment Variables
 
-| Variable             | Description                                   | Default               |
-|----------------------|-----------------------------------------------|-----------------------|
-| JUPYTER_LAB_PASSWORD | Set a password for Jupyter lab                | not set - no password |
-| DISABLE_AUTOLAUNCH   | Disable Kohya_ss from launching automatically | (not set)             |
+| Variable             | Description                                      | Default               |
+|----------------------|--------------------------------------------------|-----------------------|
+| JUPYTER_LAB_PASSWORD | Set a password for Jupyter lab                   | not set - no password |
+| DISABLE_AUTOLAUNCH   | Disable Kohya_ss from launching automaticall y   | (not set)             |
+| DISABLE_SYNC         | Disable syncing if using a RunPod network volume | (not set)             |
 
 ## Logs
 
