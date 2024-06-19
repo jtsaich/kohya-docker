@@ -1,5 +1,3 @@
 {
-  "applications": [
-    "Kohya_ss"
-  ]
+    "applications": ["Kohya_ss", "redis", "api", "celery"]
 }

@@ -3,7 +3,7 @@ variable "REGISTRY" {
 }
 
 variable "REGISTRY_USER" {
-    default = "ashleykza"
+    default = "dustar"
 }
 
 variable "APP" {
@@ -43,7 +43,7 @@ target "default" {
         INDEX_URL = "https://download.pytorch.org/whl/cu${CU_VERSION}"
         TORCH_VERSION = "2.1.2+cu${CU_VERSION}"
         XFORMERS_VERSION = "0.0.23.post1+cu${CU_VERSION}"
-        KOHYA_VERSION = "v${RELEASE}"
+        KOHYA_VERSION = "v${RELEASE}-gazai"
         APP_MANAGER_VERSION = "1.0.2"
     }
 }

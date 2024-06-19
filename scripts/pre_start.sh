@@ -23,7 +23,7 @@ sync_apps() {
         echo "Syncing Application Manager to workspace, please wait..."
         mv /app-manager /workspace/app-manager
 
-        echo "${TEMPLATE_VERSION}" > ${DOCKER_IMAGE_VERSION_FILE}
+        echo "${TEMPLATE_VERSION}" >${DOCKER_IMAGE_VERSION_FILE}
     fi
 }
 
@@ -57,10 +57,9 @@ fi
 
 # Start application manager
 cd /workspace/app-manager
-npm start > /workspace/logs/app-manager.log 2>&1 &
+npm start >/workspace/logs/app-manager.log 2>&1 &
 
-if [[ ${DISABLE_AUTOLAUNCH} ]]
-then
+if [[ ${DISABLE_AUTOLAUNCH} ]]; then
     echo "Auto launching is disabled so the application will not be started automatically"
     echo "You can launch them it using the launcher script:"
     echo ""
@@ -68,5 +67,9 @@ then
 else
     /start_kohya_ss.sh
 fi
+
+/start_redis.sh
+/start_api.sh
+/start_celery.sh
 
 echo "All services have been started"

@@ -11,15 +11,15 @@ ENV DEBIAN_FRONTEND=noninteractive \
 # Add SDXL base model
 # This needs to already have been downloaded:
 #   wget https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors
-RUN mkdir -p /sd-models
-COPY sd_xl_base_1.0.safetensors /sd-models/sd_xl_base_1.0.safetensors
+# RUN mkdir -p /sd-models
+# COPY sd_xl_base_1.0.safetensors /sd-models/sd_xl_base_1.0.safetensors
 
 # Create workspace working directory
 WORKDIR /
 
 # Install Kohya_ss
 ARG KOHYA_VERSION
-RUN git clone https://github.com/bmaltais/kohya_ss.git /kohya_ss && \
+RUN git clone https://github.com/gazai-io/kohya_ss_runpod.git /kohya_ss && \
     cd /kohya_ss && \
     git checkout ${KOHYA_VERSION} && \
     git submodule update --init --recursive
@@ -34,11 +34,14 @@ RUN python3 -m venv --system-site-packages venv && \
     pip3 install torch==${TORCH_VERSION} torchvision torchaudio --index-url ${INDEX_URL} && \
     pip3 install xformers==${XFORMERS_VERSION} --index-url ${INDEX_URL} && \
     pip3 install bitsandbytes==0.43.0 \
-        tensorboard==2.14.1 tensorflow==2.14.0 \
-        wheel packaging tensorrt && \
+    tensorboard==2.14.1 tensorflow==2.14.0 \
+    wheel packaging tensorrt && \
     pip3 install tensorflow[and-cuda] && \
     pip3 install -r requirements.txt && \
     deactivate
+
+# Install redis
+RUN apt-get update && apt-get install -y redis-server
 
 # Install Application Manager
 ARG APP_MANAGER_VERSION

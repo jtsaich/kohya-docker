@@ -125,3 +125,9 @@ are welcome. Bug fixes and new features are encouraged.
 ## Appreciate my work?
 
 <a href="https://www.buymeacoffee.com/ashleyk" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
+### Training Task Queue
+
+```bash
+http localhost:8001/model/train name=test baseModel='stabilityai/stable-diffusion-xl-base-1.0' userId=clwyxv3h30000fh6yiygggtle resolution=1024,1024 title='' fileName=xyz instancePrompt=plugirl classPrompt=person trainingImageIds:='["clx51fqe60000ffwgyu8koug2"]'
+```
